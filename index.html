@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sharjeel Malik</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --fg: #f0ede6;
+      --accent: #ffffff;
+      --muted: #888;
+      --border: #2a2a2a;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'EB Garamond', serif;
+      font-size: 18px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 3rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 100;
+    }
+
+    .nav-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    /* PAGES */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* PORTFOLIO PAGE */
+    .intro {
+      max-width: 680px;
+      margin: 4rem auto 3rem;
+      padding: 0 3rem;
+    }
+
+    .intro p {
+      font-size: 1.15rem;
+      color: #c8c4bc;
+      line-height: 1.8;
+    }
+
+    .divider {
+      width: calc(100% - 6rem);
+      margin: 0 3rem 3rem;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* PROJECT LIST */
+    .projects {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 3rem 6rem;
+    }
+
+    .project {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
+    }
+
+    .project:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .project-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-top: 0.4rem;
+      flex-shrink: 0;
+    }
+
+    .project-title {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--accent);
+      line-height: 1.3;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+      padding-left: calc(0.7rem + 1.5rem);
+    }
+
+    .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.2rem 0.6rem;
+    }
+
+    .project-content {
+      padding-left: calc(0.7rem + 1.5rem);
+    }
+
+    .project-content p {
+      color: #b8b4ac;
+      font-size: 1rem;
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+
+    .project-images {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .project-images.two-col { grid-template-columns: 1fr 1fr; }
+    .project-images.one-col { grid-template-columns: 1fr; }
+
+    .project-images img {
+      width: 100%;
+      border: 1px solid var(--border);
+      display: block;
+    }
+
+    .img-caption {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      margin-top: 0.4rem;
+      text-align: center;
+    }
+
+    /* RESUME PAGE */
+    .resume-page {
+      max-width: 860px;
+      margin: 4rem auto;
+      padding: 0 3rem 6rem;
+    }
+
+    .resume-page h2 {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .resume-download {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      color: var(--fg);
+      padding: 0.6rem 1.2rem;
+      text-decoration: none;
+      margin-bottom: 2.5rem;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .resume-download:hover {
+      background: var(--fg);
+      color: var(--bg);
+    }
+
+    .resume-img {
+      width: 100%;
+      border: 1px solid var(--border);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      nav { padding: 1.5rem; }
+      .intro, .projects, .resume-page { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .divider { width: calc(100% - 3rem); margin-left: 1.5rem; }
+      .project-images.two-col { grid-template-columns: 1fr; }
+      .project-content, .project-tags { padding-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-name">Sharjeel Malik</span>
+    <ul class="nav-links">
+      <li><a class="active" onclick="showPage('portfolio')" id="tab-portfolio">Portfolio</a></li>
+      <li><a onclick="showPage('resume')" id="tab-resume">Resume</a></li>
+    </ul>
+  </nav>
+
+  <!-- PORTFOLIO PAGE -->
+  <div id="page-portfolio" class="page active">
+    <div class="intro">
+      <p>Hey, welcome to my portfolio! I'm Sharjeel Malik, an Aerospace Engineering student at Embry-Riddle specializing in Astronautics. I serve as the Lead Engineer for ERPL's Project R.E.D., led a 4-member team in the conceptual design for Project Faraday, and conduct undergraduate research in rocket engine thermoacoustic instabilities. Please explore my projects below!</p>
+    </div>
+    <div class="divider"></div>
+
+    <div class="projects">
+
+      <!-- PROJECT 1 -->
+      <div class="project">
+        <div class="project-header">
+          <span class="project-num">01</span>
+          <span class="project-title">Film Cooling & Thermal Barrier Coating Analysis Framework</span>
+        </div>
+        <div class="project-tags">
+          <span class="tag">MATLAB</span>
+          <span class="tag">Thermal Analysis</span>
+          <span class="tag">Project R.E.D.</span>
+          <span class="tag">ERPL</span>
+        </div>
+        <div class="project-content">
+          <p>To advance thermal analysis capabilities for Project R.E.D., I upgraded ERPL's legacy 1D regenerative cooling MATLAB solver by integrating custom models for liquid-film cooling and Polydimethylsiloxane (PDMS) thermal barrier coatings.</p>
+          <p>The film-cooling framework was developed using empirical relations from the Grisson paper and implemented as a modular, toggleable function within the core script to dynamically evaluate localized coolant-layer effectiveness and adiabatic wall-temperature reductions. To accurately capture the coupled thermal effects, I integrated a PDMS coating model directly into the main solver loop, adjusting the fundamental heat flux and wall temperature calculations based on operational data from other collegiate rocketry teams.</p>
+          <p>This combined numerical framework allows the propulsion team to run high-fidelity trade studies on composite thermal protection systems, characterizing critical heat fluxes and verifying engine survivability under nominal firing conditions.</p>
+          <div class="project-images two-col">
+            <div>
+              <img src="images/wall-temp-regen-pdms.png" alt="Computed Wall Temperatures – Regen and PDMS" />
+              <p class="img-caption">Regen + PDMS</p>
+            </div>
+            <div>
+              <img src="images/wall-temp-regen-pdms-film.png" alt="Computed Wall Temperatures – Regen, PDMS, and Film" />
+              <p class="img-caption">Regen + PDMS + Film</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 2 -->
+      <div class="project">
+        <div class="project-header">
+          <span class="project-num">02</span>
+          <span class="project-title">Automated Rocket Engine Sizing & Geometry Calculator</span>
+        </div>
+        <div class="project-tags">
+          <span class="tag">MATLAB</span>
+          <span class="tag">NASA CEA</span>
+          <span class="tag">Autodesk Inventor</span>
+          <span class="tag">Project Faraday</span>
+        </div>
+        <div class="project-content">
+          <p>To streamline the conceptual development of Project Faraday, I built a comprehensive MATLAB engine sizing calculator that automates the geometric and performance design pipeline for a liquid bipropellant engine.</p>
+          <p>The framework utilizes a dynamic MATLAB wrapper to run NASA CEA on the fly, extracting real-time thermodynamic properties—including specific impulse (Isp), local Mach numbers, temperatures, and pressures—based on user-defined operational parameters such as thrust, chamber pressure, and O/F ratio. Using these outputs, the script calculates the core combustion chamber dimensions, propellant stay times, and contour profiles for the converging-diverging nozzle.</p>
+          <p>To bridge the gap between numerical analysis and CAD, the code automatically processes the continuous contour profile into discretized X, Y coordinate pairs and exports them directly into an organized Excel spreadsheet, enabling immediate, high-fidelity curve-splining within Autodesk Inventor.</p>
+          <div class="project-images two-col">
+            <div>
+              <img src="images/faraday-matlab.png" alt="Project FARADAY MATLAB geometry visualization" />
+              <p class="img-caption">MATLAB geometry output – Project FARADAY</p>
+            </div>
+            <div>
+              <img src="images/faraday-cad.png" alt="Project FARADAY CAD cross-section" />
+              <p class="img-caption">Autodesk Inventor CAD model</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 3 -->
+      <div class="project">
+        <div class="project-header">
+          <span class="project-num">03</span>
+          <span class="project-title">Eigenvalue-Based Thermoacoustic Analysis of Rocket Engines</span>
+        </div>
+        <div class="project-tags">
+          <span class="tag">Research</span>
+          <span class="tag">MATLAB</span>
+          <span class="tag">Combustion Instability</span>
+          <span class="tag">ERAU</span>
+        </div>
+        <div class="project-content">
+          <p>To investigate thermoacoustic combustion instability in liquid rocket engines, I developed an analytical modeling framework that predicts acoustic mode behavior and thermal response within combustion chambers and nozzles.</p>
+          <p>Starting from the governing conservation equations for mass, momentum, and energy, I linearized the system and derived closed-form solutions describing pressure, velocity, and temperature perturbations under both rectangular and cylindrical boundary conditions. The framework employed eigenvalue analysis, separation of variables, and eigenfunction expansions to characterize acoustic stability, modal decay rates, and spatial mode shapes using sine and Bessel-function formulations appropriate for varying engine geometries.</p>
+          <p>To evaluate the coupling between combustion-driven heat release and chamber acoustics, I incorporated thermoacoustic stability concepts, including the Rayleigh criterion and flame transfer function theory, establishing a mathematical foundation for predicting instability growth mechanisms in propulsion systems. The analytical formulation is currently being transitioned into a MATLAB-based computational solver.</p>
+          <div class="project-images one-col">
+            <div>
+              <img src="images/combustion-stability-poster.png" alt="Thermoacoustic stability research poster" />
+              <p class="img-caption">ERAU undergraduate research poster – Spring 2026</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RESUME PAGE -->
+  <div id="page-resume" class="page">
+    <div class="resume-page">
+      <h2>Resume</h2>
+      <a class="resume-download" href="resume/Malik_Sharjeel_Resume.pdf" download>↓ Download PDF</a>
+      <img class="resume-img" src="resume/Malik_Sharjeel_Resume.png" alt="Sharjeel Malik Resume" />
+    </div>
+  </div>
+
+  <script>
+    function showPage(name) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      document.getElementById('page-' + name).classList.add('active');
+      document.getElementById('tab-' + name).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
